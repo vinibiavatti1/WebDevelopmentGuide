@@ -227,5 +227,24 @@ function isAdmin(employee) {
     return employee.role === 'admin'
 }
 
+//==================================================================================================
+// Inline Type Casting
+//==================================================================================================
+
+/**
+ * @type {isAdmin}
+ */
+function isAdministrator(employee) {
+    return employee.role === 'admin'
+}
+
+/**
+ * @type {User['isOverage']}
+ */
+function isOverage() {
+    return true
+}
+
 // Export to prevent name conflicts.
 export { }
+

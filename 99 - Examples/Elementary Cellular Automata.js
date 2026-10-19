@@ -4,47 +4,36 @@ class ElementaryCellularAutomataError extends Error { }
 
 /**
  * @typedef {Object} Rule
- * @property {boolean} b000 000
- * @property {boolean} b001 001
- * @property {boolean} b010 010
- * @property {boolean} b011 011
- * @property {boolean} b100 100
- * @property {boolean} b101 101
- * @property {boolean} b110 110
- * @property {boolean} b111 111
- * @property {(left: boolean, middle: boolean, right: boolean) => boolean} isAlive Check if cell is alive.
+ * @property {boolean} b000
+ * @property {boolean} b001
+ * @property {boolean} b010
+ * @property {boolean} b011
+ * @property {boolean} b100
+ * @property {boolean} b101
+ * @property {boolean} b110
+ * @property {boolean} b111
+ * @property {(left: boolean, middle: boolean, right: boolean) => boolean} isAlive
  */
 
 /**
- * @typedef {Object} ElementaryCellularAutomata
- * @property {() => void} reset
- * @property {(rule: Rule) => void} process
- * @property {(writer: (data: string) => void) => void} render
- * @property {(row: number, col: number, alive: boolean) => void} setCell
- * @property {(alive: string, dead: string) => void} setSymbols
- */
-
-/**
- * Create rule.
- * @param {boolean} b000 The 000 result.
- * @param {boolean} b001 The 001 result.
- * @param {boolean} b010 The 010 result.
- * @param {boolean} b011 The 011 result.
- * @param {boolean} b100 The 100 result.
- * @param {boolean} b101 The 101 result.
- * @param {boolean} b110 The 110 result.
- * @param {boolean} b111 The 111 result.
- * @returns {Rule} Rule instance.
+ * @param {boolean} b000
+ * @param {boolean} b001
+ * @param {boolean} b010
+ * @param {boolean} b011
+ * @param {boolean} b100
+ * @param {boolean} b101
+ * @param {boolean} b110
+ * @param {boolean} b111
+ * @returns {Rule}
  */
 const createRule = (b000, b001, b010, b011, b100, b101, b110, b111) => {
     const map = { b000, b001, b010, b011, b100, b101, b110, b111 }
 
     /**
-     * Check if cell is alive based on the rule.
-     * @param {boolean} left The left bit.
-     * @param {boolean} middle The middle bit.
-     * @param {boolean} right The right bit.
-     * @returns {boolean} True if cell is alive based on the rule.
+     * @param {boolean} left
+     * @param {boolean} middle
+     * @param {boolean} right
+     * @returns {boolean}
      */
     const isAlive = (left, middle, right) => {
         const leftBit = left ? '1' : '0'
@@ -60,9 +49,8 @@ const createRule = (b000, b001, b010, b011, b100, b101, b110, b111) => {
 }
 
 /**
- * Decodifies a rule number into bits.
- * @param {number} n Rule number.
- * @returns {Rule} Rule.
+ * @param {number} n
+ * @returns {Rule}
  */
 const parseRule = n => {
     if (!Number.isInteger(n) || n < 0 || n >= 256) {
@@ -82,39 +70,39 @@ const parseRule = n => {
 }
 
 /**
- * Create a new ElementaryCellularAutomata.
- * @param {number} width The grid width.
- * @param {number} height The grid height.
- * @returns {ElementaryCellularAutomata} A ElementaryCellularAutomata instance.
+ * @typedef {Object} ElementaryCellularAutomata
+ * @property {() => void} reset
+ * @property {(rule: Rule) => void} process
+ * @property {(writer: (data: string) => void) => void} render
+ * @property {(row: number, col: number, alive: boolean) => void} setCell
+ * @property {(alive: string, dead: string) => void} setSymbols
+ */
+
+/**
+ * @param {number} width
+ * @param {number} height
+ * @returns {ElementaryCellularAutomata}
  */
 const createElementaryCellularAutomata = (width, height) => {
     /**
-     * The grid to process generation.
      * @type {boolean[][]}
      */
     let grid = []
 
-    /**
-     * Cell symbols.
-     */
     const symbols = {
         alive: '*',
         dead: ' '
     }
 
     /**
-     * Set symbols for rendering.
-     * @param {string} alive The alive symbol.
-     * @param {string} dead The dead symbol.
+     * @param {string} alive
+     * @param {string} dead
      */
     const setSymbols = (alive = '*', dead = ' ') => {
         symbols.alive = alive
         symbols.dead = dead
     }
 
-    /**
-     * Reset grid.
-     */
     const reset = () => {
         grid = []
         for (let row = 0; row < height; row++) {
@@ -127,16 +115,14 @@ const createElementaryCellularAutomata = (width, height) => {
     }
 
     /**
-     * Check if coords are valid.
-     * @param {number} row The row number.
-     * @param {number} col The col number.
-     * @returns {boolean} True if coords are valid.
+     * @param {number} row
+     * @param {number} col
+     * @returns {boolean}
      */
     const isValidCoords = (row, col) => row >= 0 && row < height && col >= 0 && col < width
 
     /**
-     * Process celluar automata based on the rule.
-     * @param {Rule} rule The rule to be used as base.
+     * @param {Rule} rule
      */
     const process = rule => {
         for (let row = 1; row < height; row++) {
@@ -149,8 +135,7 @@ const createElementaryCellularAutomata = (width, height) => {
     }
 
     /**
-     * Render the result.
-     * @param {(data: string) => void} writer the writer.
+     * @param {(data: string) => void} writer
      */
     const render = writer => {
         for (let row = 0; row < height; row++) {
@@ -163,10 +148,9 @@ const createElementaryCellularAutomata = (width, height) => {
     }
 
     /**
-     * Get top cells state.
-     * @param {number} row The row number.
-     * @param {number} col The col number.
-     * @returns {[boolean, boolean, boolean]} Top cells state.
+     * @param {number} row
+     * @param {number} col
+     * @returns {[boolean, boolean, boolean]}
      */
     const getTopCellsState = (row, col) => {
         const left = isValidCoords(row - 1, col - 1) ? grid[row - 1][col - 1] : false
@@ -176,10 +160,9 @@ const createElementaryCellularAutomata = (width, height) => {
     }
 
     /**
-     * Set cell state.
-     * @param {number} row The row number.
-     * @param {number} col The col number.
-     * @param {boolean} alive True if alive.
+     * @param {number} row
+     * @param {number} col
+     * @param {boolean} alive
      */
     const setCell = (row, col, alive) => {
         if (!isValidCoords(row, col)) {
@@ -195,7 +178,7 @@ const createElementaryCellularAutomata = (width, height) => {
         process,
         render,
         setCell,
-        setSymbols
+        setSymbols,
     }
 }
 
