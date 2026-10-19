@@ -9,19 +9,16 @@
 // TypeScript Check
 //==================================================================================================
 
-/**
- * Enable TS Check
- * - The "// @ts-check" comment enables static type checking in a single JavaScript file.
- * - It uses VS Code's built-in TypeScript language engine, meaning no extra TypeScript installation
- *   or dependencies are required.
- */
+// Enable TS Check
+// - The "// @ts-check" comment enables static type checking in a single JavaScript file.
+// - It uses VS Code's built-in TypeScript language engine, meaning no extra TypeScript installation
+//   or dependencies are required.
+
 // @ts-check
 
-/**
- * Enable TS Check Globally
- * - To enable type checking globally across your entire project without adding the directive to
- *   every file, create a "jsconfig.json" file at the project root:
- */;
+// Enable TS Check Globally
+// - To enable type checking globally across your entire project without adding the directive to
+//   every file, create a "jsconfig.json" file at the project root:
 `
 {
     "compilerOptions": {
@@ -29,11 +26,13 @@
         "strict": true
     }
 }
-`;
+`
 
 //==================================================================================================
 // Variables & Constants
 //==================================================================================================
+
+// Primitive Type
 
 /**
  * User name.
@@ -41,11 +40,15 @@
  */
 let userName = 'John'
 
+// Union
+
 /**
  * User id.
  * @type {number | string}
  */
 let userId = 1
+
+// Lists
 
 /**
  * List of values.
@@ -53,11 +56,15 @@ let userId = 1
  */
 let values = ['A', 'B', 'C']
 
+// Tuples
+
 /**
  * Point 2D.
  * @type {[number, number]}
  */
 let point = [1, 2]
+
+// Constants
 
 /**
  * API base url.
@@ -68,6 +75,8 @@ const BASE_URL = 'http://api.dev'
 //==================================================================================================
 // Objects & Enums
 //==================================================================================================
+
+// Objects
 
 /**
  * User data.
@@ -80,6 +89,8 @@ let userData = {
     age: 30
 }
 
+// Readonly Objects
+
 /**
  * Config object.
  * @type {Object}
@@ -88,6 +99,8 @@ let userData = {
 const CONFIG = Object.freeze({
     timeout: 1200
 })
+
+// Enums
 
 /**
  * Colors enumeration.
@@ -104,6 +117,8 @@ const Colors = Object.freeze({
 // Function & Methods
 //==================================================================================================
 
+// Function
+
 /**
  * Calculates the sum of two numbers.
  * @param {number} x The first number to sum.
@@ -113,6 +128,8 @@ const Colors = Object.freeze({
 function sum(x, y) {
     return x + y
 }
+
+// Function with Exception
 
 /**
  * Calculates the division of two numbers.
@@ -128,6 +145,8 @@ function div(x, y) {
     return x / y
 }
 
+// Async Function (Promise)
+
 /**
  * Fetches the user data.
  * @param {number} userId The user id.
@@ -138,6 +157,8 @@ async function fetchUserName(userId) {
     return response.text()
 }
 
+// Function with Callback
+
 /**
  * Open a file.
  * @param {string} name The file name.
@@ -147,6 +168,8 @@ function openFile(name, callback) {
     const content = 'Hello World'
     callback(content)
 }
+
+// Function with Callback (As Arrow Function)
 
 /**
  * Reads the file content.
@@ -162,6 +185,8 @@ function readFile(name, callback) {
 // Type Definition
 //==================================================================================================
 
+// Custom Type Definition
+
 /**
  * Define the User type.
  * @typedef {Object} User
@@ -169,6 +194,8 @@ function readFile(name, callback) {
  * @property {number} age The user age.
  * @property {function(): boolean} isOverage True if the age > 18.
  */
+
+// Using Custom Type Definition
 
 /**
  * Registers the user in the database.
@@ -184,11 +211,15 @@ function registerUser(user) {
 // Callbacks
 //==================================================================================================
 
+// Callback Definition
+
 /**
  * Define the ProcessFileContent callback.
  * @callback ProcessFileContent
  * @param {string} content The file content.
  */
+
+// Using Callback Definition
 
 /**
  * Reads the document content.
@@ -201,8 +232,10 @@ function readDocument(name, callback) {
 }
 
 //==================================================================================================
-// Generics
+// Generics (Templates)
 //==================================================================================================
+
+// Generics
 
 /**
  * Retrieves the first element from the array.
@@ -218,6 +251,8 @@ function getFirstElement(array) {
 // Importing Types
 //==================================================================================================
 
+// Import
+
 /**
  * Check if the employee has the admin role.
  * @param {import('../.resources/module.js').Employee} employee The employee.
@@ -231,12 +266,16 @@ function isAdmin(employee) {
 // Inline Type Casting
 //==================================================================================================
 
+// Re-using Type
+
 /**
  * @type {isAdmin}
  */
 function isAdministrator(employee) {
     return employee.role === 'admin'
 }
+
+// Re-using Type from Type Definition
 
 /**
  * @type {User['isOverage']}
@@ -245,6 +284,4 @@ function isOverage() {
     return true
 }
 
-// Export to prevent name conflicts.
 export { }
-
