@@ -1,15 +1,15 @@
-/**
- * Switch (Conditional Statement)
- *
- * Evaluates an expression, matching its value against a series of case clauses,
- * and executes the corresponding statements until a break or the end of the block is reached.
- */
+// Switch (Conditional Statement)
+// - Evaluates an expression, matching its value against a series of case clauses, and executes the
+//   corresponding statements until a break or the end of the block is reached.
 
-/**
- * Switch
- * - Compares the expression strictly (===) against case values and executes the matching block.
- * - Output: success
- */
+//==================================================================================================
+// Examples
+//==================================================================================================
+
+// Switch
+// - Compares the expression strictly (===) against case values and executes the matching block.
+// - Output: success
+
 let httpStatus = 200
 switch (httpStatus) {
     case 200:
@@ -20,11 +20,10 @@ switch (httpStatus) {
         break
 }
 
-/**
- * Switch With Multiple Cases (Grouped)
- * - Stacks multiple case clauses together to share the same execution block.
- * - Output: error
- */
+// Switch With Multiple Cases (Grouped)
+// - Stacks multiple case clauses together to share the same execution block.
+// - Output: error
+
 httpStatus = 500
 switch (httpStatus) {
     case 200:
@@ -37,12 +36,11 @@ switch (httpStatus) {
         break
 }
 
-/**
- * Switch With Fall-Through
- * - Demonstrates intentional fall-through where omitting breaks allows execution to cascade down
- *   into subsequent case blocks.
- * - Output: error
- */
+// Switch With Fall-Through
+// - Demonstrates intentional fall-through where omitting breaks allows execution to cascade down
+//   into subsequent case blocks.
+// - Output: error
+
 httpStatus = 400
 switch (httpStatus) {
     case 200:
@@ -55,11 +53,10 @@ switch (httpStatus) {
         break
 }
 
-/**
- * Switch With Default
- * - Acts as a fallback clause executed if none of the explicit case values match.
- * - Output: unknown
- */
+// Switch With Default
+// - Acts as a fallback clause executed if none of the explicit case values match.
+// - Output: unknown
+
 httpStatus = 300
 switch (httpStatus) {
     case 200:
@@ -72,12 +69,11 @@ switch (httpStatus) {
         console.log('unknown')
 }
 
-/**
- * Switch With Block-Scoped Cases
- * - Wraps case bodies in curly braces to safely declare block-scoped variables (let/const)  without
- *   colliding with other cases.
- * - Output:
- */
+// Switch With Block-Scoped Cases
+// - Wraps case bodies in curly braces to safely declare block-scoped variables (let/const)  without
+//   colliding with other cases.
+// - Output:
+
 httpStatus = 500
 switch (role) {
     case 200: {
@@ -86,7 +82,7 @@ switch (role) {
         break
     }
     case 500: {
-        let message = 'error' // Avoids redeclaration conflict
+        let message = 'error' // <- Avoids redeclaration conflict
         console.log(message)
         break
     }

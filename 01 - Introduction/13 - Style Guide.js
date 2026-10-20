@@ -185,7 +185,6 @@ const clazz = 'Person'
 // Special Names
 // - A cheatsheet of shorthand and idiomatic variable names widely used across the JS/Node
 //   ecosystem.
-
 // n                - Count, Length, Quantity, Number
 // arr, obj, st, mp - Array, Object, Set, Map
 // i, j, k          - Loop indexes
