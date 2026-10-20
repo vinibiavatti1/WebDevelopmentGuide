@@ -81,9 +81,9 @@ console.log(document.body)
 
 // Cookie
 // - Gets or sets the key-value pairs of cookies associated with the current document.
-// - Output: user=Vini
+// - Output: user=John
 
-document.cookie = 'user=Vini; path=/'
+document.cookie = 'user=John; path=/'
 console.log(document.cookie)
 
 // Active Element

@@ -13,11 +13,10 @@
 let id = Symbol('id')
 console.log(id)
 
-/**
- * Unique
- * - Symbols are guaranteed to be unique. Even with the same description, they are never equal.
- * - Output: false (always)
- */
+// Unique
+// - Symbols are guaranteed to be unique. Even with the same description, they are never equal.
+// - Output: false (always)
+
 let id1 = Symbol('id')
 let id2 = Symbol('id')
 console.log(id1 === id2)
