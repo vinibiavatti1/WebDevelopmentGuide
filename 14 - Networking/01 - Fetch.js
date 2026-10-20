@@ -1,59 +1,51 @@
-/**
- * Fetch
- *
- * Provides a promise-based interface for making HTTP requests and handling responses in Node.js
- * (v18+) and modern web browsers without external dependencies.
- *
- * Note: Unlike libraries such as Axios, native fetch requires explicit JSON serialization via
- * 'JSON.stringify()' and the 'Content-Type: application/json' header. Passing a raw JS object
- * will implicitly convert it to '[object Object]', breaking the request payload.
- */
+// Fetch
+// - Provides a promise-based interface for making HTTP requests and handling responses in Node.js
+//   and modern web browsers without external dependencies.
+// - Note: Unlike libraries such as Axios, native fetch requires explicit JSON serialization via
+//   JSON.stringify() and the 'Content-Type: application/json' header. Passing a raw JS object
+//   will implicitly convert it to '[object Object]', breaking the request payload.
+
 import fs from 'node:fs/promises'
 
 //==================================================================================================
 // HTTP Methods
 //==================================================================================================
 
-/**
- * GET
- * - Fetches resources from a server without modifying state.
- */
+// GET
+// - Fetches resources from a server without modifying state.
+
 let response = await fetch('https://api.dev/employees/123')
 
-/**
- * POST
- * - Sends a JSON payload to create a new server resource.
- */
+// POST
+// - Sends a JSON payload to create a new server resource.
+
 response = await fetch('https://api.dev/employees', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: 'John', age: 30 })
 })
 
-/**
- * PUT
- * - Replaces an entire target resource with the request payload.
- */
+// PUT
+// - Replaces an entire target resource with the request payload.
+
 response = await fetch('https://api.dev/employees/123', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: 'John', age: 30 })
 })
 
-/**
- * PATCH
- * - Applies partial modifications to a resource.
- */
+// PATCH
+// - Applies partial modifications to a resource.
+
 response = await fetch('https://api.dev/employees/123', {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: 'John', age: 30 })
 })
 
-/**
- * DELETE
- * - Deletes the specified resource from the server.
- */
+// DELETE
+// - Deletes the specified resource from the server.
+
 response = await fetch('https://api.dev/employees/123', {
     method: 'DELETE'
 })
@@ -62,20 +54,18 @@ response = await fetch('https://api.dev/employees/123', {
 // HTTP Headers
 //==================================================================================================
 
-/**
- * Request Headers
- * - Sets custom metadata and payload formats sent to the server.
- */
+// Set Request Headers
+// - Sets custom metadata and payload formats sent to the server.
+
 response = await fetch('https://api.dev/employees/123', {
     method: 'POST',
     headers: { 'Authorization': 'Bearer xxx' }
 })
 
-/**
- * Response Headers
- * - Reads metadata returned by the server headers object.
- * - Output: content-type application/json | cache-control no-cache
- */
+// Read Response Headers
+// - Reads metadata returned by the server headers object.
+// - Output: content-type application/json | cache-control no-cache
+
 response = await fetch('https://api.dev/employees/123')
 response.headers.forEach((val, key) => console.log(key, val))
 
@@ -83,17 +73,16 @@ response.headers.forEach((val, key) => console.log(key, val))
 // HTTP Response
 //==================================================================================================
 
-/**
- * Processing JSON Response
- * - The 'response.ok' boolean property checks if the HTTP status code is in the 200-299 range.
- * - Response parsing methods (all return Promises):
- *   - 'json()': Parses response body as JSON object.
- *   - 'text()': Parses response body as plain text/string.
- *   - 'arrayBuffer()': Reads response body as raw binary ArrayBuffer (ideal for files/buffers).
- *   - 'blob()': Reads response body as a Blob object (useful for files/media in browsers).
- *   - 'bytes()': Reads response body as a Uint8Array (modern Node.js v18+ / Web API).
- * - Output: { name: 'John', age: 30 }
- */
+// Processing JSON Response
+// - The 'response.ok' boolean property checks if the HTTP status code is in the 200-299 range.
+// - Response parsing methods (all return Promises):
+// - 'json()': Parses response body as JSON object.
+// - 'text()': Parses response body as plain text/string.
+// - 'arrayBuffer()': Reads response body as raw binary ArrayBuffer (ideal for files/buffers).
+// - 'blob()': Reads response body as a Blob object (useful for files/media in browsers).
+// - 'bytes()': Reads response body as a Uint8Array (modern Node.js v18+ / Web API).
+// - Output: { name: 'John', age: 30 }
+
 response = await fetch('https://api.dev/employees/123')
 if (response.ok) {
     const data = await response.json()
@@ -104,11 +93,10 @@ if (response.ok) {
 // Multipart & Binary Data
 //==================================================================================================
 
-/**
- * Upload File
- * - Constructs 'multipart/form-data' using FormData and Web File API.
- * - Note: Do not set 'Content-Type' manually when sending FormData; fetch auto-sets the boundary.
- */
+// Upload File
+// - Constructs 'multipart/form-data' using FormData and Web File API.
+// - Note: Do not set 'Content-Type' manually when sending FormData; fetch auto-sets the boundary.
+
 const buf = await fs.readFile('.\\.resources\\file.txt')
 const file = new File([buf], 'file.txt', { type: 'text/plain' })
 const formData = new FormData()
@@ -118,11 +106,10 @@ response = await fetch('https://api.dev/upload', {
     body: formData
 })
 
-/**
- * Download File
- * - Handles raw binary responses directly using ArrayBuffer converted to Node.js Buffer.
- * - Output: Hello World
- */
+// Download File
+// - Handles raw binary responses directly using ArrayBuffer converted to Node.js Buffer.
+// - Output: Hello World
+
 response = await fetch('https://api.dev/download')
 if (response.ok) {
     const arrayBuf = await response.arrayBuffer()
