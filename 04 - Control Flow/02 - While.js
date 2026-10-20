@@ -1,4 +1,4 @@
-// While
+// While Loop
 // - Loop statements are used to execute a block of code repeatedly as long as a specified condition
 //   evaluates to true.
 

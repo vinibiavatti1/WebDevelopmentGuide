@@ -75,7 +75,7 @@ switch (httpStatus) {
 // - Output:
 
 httpStatus = 500
-switch (role) {
+switch (httpStatus) {
     case 200: {
         let message = 'success'
         console.log(message)

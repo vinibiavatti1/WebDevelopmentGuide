@@ -1,4 +1,4 @@
-// For
+// For Loop
 // - Loop statements are used to repeat a block of code a specific number of times or iterate over
 //   collections like arrays, strings, and object properties.
 

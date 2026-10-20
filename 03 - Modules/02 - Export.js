@@ -10,7 +10,7 @@
 // - Allows multiple exports per module.
 // - Each exported item must be imported using its exact name (or aliased using 'as').
 
-export let name = 'John'
+export let person = 'John'
 
 // Default Export
 // - Defines a primary export for the module. A module can have ONLY ONE default export.
@@ -19,15 +19,18 @@ export let name = 'John'
 //   because variable declarations can contain multiple items (e.g., const a = 1, b = 2),
 //   which would break the parser's syntax rules.
 
-let surname = 'Doe'
-export default surname
+const TIMEOUT = 100
+export default TIMEOUT
 
-// Export List
-// - Exports a list of pre-defined variables, functions, or objects from the module scope.
+// Export Collection
+// - Exports a collection (object) of pre-defined variables, functions, or objects from the module
+//   scope.
 
+let findById = () => { }
+let findByName = () => { }
 export {
-    name,
-    surname
+    findById,
+    findByName
 }
 
 // Examples
