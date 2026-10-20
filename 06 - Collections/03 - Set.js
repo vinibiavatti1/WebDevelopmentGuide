@@ -4,7 +4,7 @@
 //   intersection, and difference.
 
 //==================================================================================================
-// Set
+// Declaration
 //==================================================================================================
 
 // Declaration
@@ -21,6 +21,10 @@ console.log(st)
 st = new Set(['A', 'A', 'A'])
 console.log(st)
 
+//==================================================================================================
+// Operations
+//==================================================================================================
+
 // Length (Size)
 // - Returns the total number of unique elements present in the Set.
 // - Output: 1
@@ -35,42 +39,6 @@ console.log(st.size)
 
 st = new Set(['A', 'B', 'C'])
 console.log(st instanceof Set)
-
-//==================================================================================================
-// Value Operations
-//==================================================================================================
-
-// Has
-// - Returns a boolean indicating whether an element exists in the Set.
-// - Output: true
-
-st = new Set(['A', 'B', 'C'])
-console.log(st.has('B'))
-
-// Add
-// - Inserts a new element into the Set if it is not already present.
-// - Output: Set(3) { 'A', 'B', 'C' }
-
-st = new Set(['A', 'B'])
-st.add('A')
-st.add('C')
-console.log(st)
-
-// Delete
-// - Removes a specified element from the Set.
-// - Output: Set(2) { 'A', 'C' }
-
-st = new Set(['A', 'B', 'C'])
-st.delete('B')
-console.log(st)
-
-// Clear
-// - Removes all elements from the Set.
-// - Output: Set(0) {}
-
-st = new Set(['A', 'B', 'C'])
-st.clear()
-console.log(st)
 
 //==================================================================================================
 // Iteration
@@ -115,7 +83,43 @@ let clone = new Set([...st, 'C'])
 console.log(clone)
 
 //==================================================================================================
-// Set Operations
+// Content Mathods
+//==================================================================================================
+
+// Has
+// - Returns a boolean indicating whether an element exists in the Set.
+// - Output: true
+
+st = new Set(['A', 'B', 'C'])
+console.log(st.has('B'))
+
+// Add
+// - Inserts a new element into the Set if it is not already present.
+// - Output: Set(3) { 'A', 'B', 'C' }
+
+st = new Set(['A', 'B'])
+st.add('A')
+st.add('C')
+console.log(st)
+
+// Delete
+// - Removes a specified element from the Set.
+// - Output: Set(2) { 'A', 'C' }
+
+st = new Set(['A', 'B', 'C'])
+st.delete('B')
+console.log(st)
+
+// Clear
+// - Removes all elements from the Set.
+// - Output: Set(0) {}
+
+st = new Set(['A', 'B', 'C'])
+st.clear()
+console.log(st)
+
+//==================================================================================================
+// Comparing Methods
 //==================================================================================================
 
 // Is Superset Of
