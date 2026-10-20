@@ -1,12 +1,9 @@
-/**
- * Iterator
- *
- * Provides a way to access the elements of an aggregate object sequentially without exposing its
- * underlying representation. Leverages ES6+ generator functions and the native 'Symbol.iterator'
- * protocol to make custom objects iterable.
- *
- * Output: A | B | C
- */
+// Iterator
+// - Provides a way to access the elements of an aggregate object sequentially without exposing its
+//   underlying representation. Leverages ES6+ generator functions and the native 'Symbol.iterator'
+//   protocol to make custom objects iterable.
+// - Output: A | B | C
+
 const createList = (...items) => ({
     items,
     *[Symbol.iterator]() {

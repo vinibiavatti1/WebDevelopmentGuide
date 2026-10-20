@@ -1,15 +1,12 @@
-/**
- * Builder
- *
- * Separates the construction of a complex object from its representation. In JavaScript, we can
- * implement this functionally using fluent factory functions that chain method calls to mutate
- * or accumulate internal state.
- *
- * Output:
- * Table: users
- * Fields: [ 'name', 'age' ]
- * Where: [ 'name', '=', 'John' ]
- */
+// Builder
+// - Separates the construction of a complex object from its representation. In JavaScript, we can
+//   implement this functionally using fluent factory functions that chain method calls to mutate
+//   or accumulate internal state.
+// - Output:
+//   Table: users
+//   Fields: [ 'name', 'age' ]
+//   Where: [ 'name', '=', 'John' ]
+
 const createQueryBuilder = table => {
     const state = {
         table,

@@ -1,15 +1,12 @@
-/**
- * Mediator
- *
- * Defines an object that encapsulates how a set of objects interact, preventing components from
- * referencing each other explicitly. In JavaScript, we can implement this functionally by passing
- * a central mediator closure or message hub to component factories.
- *
- * Output:
- * Alice sends: Hello everyone!
- * Bob received: Hello everyone!
- * Charlie received: Hello everyone!
- */
+// Mediator
+// - Defines an object that encapsulates how a set of objects interact, preventing components from
+//   referencing each other explicitly. In JavaScript, we can implement this functionally by passing
+//   a central mediator closure or message hub to component factories.
+// - Output:
+//   Alice sends: Hello everyone!
+//   Bob received: Hello everyone!
+//   Charlie received: Hello everyone!
+
 const createChatMediator = () => {
     const colleagues = []
     return {

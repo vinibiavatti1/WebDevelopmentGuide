@@ -1,12 +1,9 @@
-/**
- * Flyweight
- *
- * Minimizes memory usage by sharing common state among multiple similar objects. In JavaScript, we
- * can implement this functionally by maintaining a shared cache closure that lazily initializes and
- * returns shared references.
- *
- * Output: true | true
- */
+// Flyweight
+// - Minimizes memory usage by sharing common state among multiple similar objects. In JavaScript,
+//   we can implement this functionally by maintaining a shared cache closure that lazily
+//   initializes and returns shared references.
+// - Output: true | true
+
 const createTextureCache = () => {
     const cache = new Map()
     return {

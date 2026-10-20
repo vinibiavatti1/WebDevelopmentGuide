@@ -1,16 +1,13 @@
-/**
- * Memento
- *
- * Captures and externalizes an object's internal state without violating encapsulation, allowing
- * the object to be restored to this state later. In JavaScript, we can implement this functionally
- * using immutable memento snapshots managed by a closure-based caretaker history.
- *
- * Output:
- * (empty) | (empty)
- * Memento Design Pattern | The Memento pattern is a design pattern that enables undo mechanisms!
- * Memento | The Memento pattern is a design pattern
- * (empty) | (empty)
- */
+// Memento
+// - Captures and externalizes an object's internal state without violating encapsulation, allowing
+//   the object to be restored to this state later. In JavaScript, we can implement this
+//   functionally using immutable memento snapshots managed by a closure-based caretaker history.
+// - Output:
+//   (empty) | (empty)
+//   Memento Design Pattern | The Memento pattern is a design pattern that enables undo mechanisms!
+//   Memento | The Memento pattern is a design pattern
+//   (empty) | (empty)
+
 const createTextEditor = () => {
     let title = '(empty)'
     let content = '(empty)'

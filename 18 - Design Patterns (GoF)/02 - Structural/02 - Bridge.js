@@ -1,14 +1,11 @@
-/**
- * Bridge
- *
- * Decouples an abstraction from its implementation so that the two can vary independently. In
- * JavaScript, we can implement this functionally by injecting implementation functions directly
- * into higher-order factory functions.
- *
- * Output:
- * [SMS to john] Alert: Server is down
- * [EMAIL to john] Alert: Server is down
- */
+// Bridge
+// - Decouples an abstraction from its implementation so that the two can vary independently. In
+//   JavaScript, we can implement this functionally by injecting implementation functions directly
+//   into higher-order factory functions.
+// - Output:
+//   [SMS to john] Alert: Server is down
+//   [EMAIL to john] Alert: Server is down
+
 const sendSms = (to, message) => console.log(`[SMS to ${to}] ${message}`)
 const sendEmail = (to, message) => console.log(`[EMAIL to ${to}] ${message}`)
 // >--- Bridge ---<

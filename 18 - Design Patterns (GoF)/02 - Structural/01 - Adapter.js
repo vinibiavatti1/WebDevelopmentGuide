@@ -1,12 +1,9 @@
-/**
- * Adapter
- *
- * Converts the interface of an existing object into another interface expected by clients. In
- * JavaScript, we can implement this functionally by wrapping incompatible functions or services
- * inside a wrapper object that translates interface calls.
- *
- * Output: log: Hello World | warn: Hello World
- */
+// Adapter
+// - Converts the interface of an existing object into another interface expected by clients. In
+//   JavaScript, we can implement this functionally by wrapping incompatible functions or services
+//   inside a wrapper object that translates interface calls.
+// - Output: log: Hello World | warn: Hello World
+
 const legacyLogger = {
     log: message => console.log(message)
 }

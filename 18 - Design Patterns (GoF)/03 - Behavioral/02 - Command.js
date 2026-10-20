@@ -1,13 +1,10 @@
-/**
- * Command
- *
- * Encapsulates a request as an object or function, letting you parameterize clients with different
- * requests, queue or log operations, and support undoable actions. In JavaScript, we can implement
- * this functionally using first-class functions or simple action objects with execute and undo
- * methods.
- *
- * Output: File Opened | File Saved | File Closed
- */
+// Command
+// - Encapsulates a request as an object or function, letting you parameterize clients with
+//   different requests, queue or log operations, and support undoable actions. In JavaScript, we
+//   can implement this functionally using first-class functions or simple action objects with
+//   execute and undo methods.
+// - Output: File Opened | File Saved | File Closed
+
 const editor = {
     openFile: () => console.log('File Opened'),
     saveFile: () => console.log('File Saved'),

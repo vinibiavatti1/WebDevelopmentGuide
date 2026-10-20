@@ -1,12 +1,9 @@
-/**
- * Interpreter
- *
- * Defines a grammatical representation for a language along with an interpreter that uses the
- * representation to evaluate expressions. Nodes are constructed via composite factory functions
- * that share a unified AST node interface.
- *
- * Output: (((a*a)+(b*b))+(2*(a*b))) | 100
- */
+// Interpreter
+// - Defines a grammatical representation for a language along with an interpreter that uses the
+//   representation to evaluate expressions. Nodes are constructed via composite factory functions
+//   that share a unified AST node interface.
+// - Output: (((a*a)+(b*b))+(2*(a*b))) | 100
+
 const varExp = name => ({
     evaluate: ctx => ctx[name],
     toString: () => name

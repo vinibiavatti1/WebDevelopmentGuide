@@ -1,12 +1,9 @@
-/**
- * Observer
- *
- * Defines a one-to-many dependency between objects so that when one object changes state, all its
- * dependents are notified automatically. In JavaScript, we can implement this functionally by
- * maintaining a set of subscriber callbacks inside a closure.
- *
- * Output: Order processed: { id: 1, status: 'success' }
- */
+// Observer
+// - Defines a one-to-many dependency between objects so that when one object changes state, all its
+//   dependents are notified automatically. In JavaScript, we can implement this functionally by
+//   maintaining a set of subscriber callbacks inside a closure.
+// - Output: Order processed: { id: 1, status: 'success' }
+
 const createOrderService = () => {
     const listeners = new Set()
     return {

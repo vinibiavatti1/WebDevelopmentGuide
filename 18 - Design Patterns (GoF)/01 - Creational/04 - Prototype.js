@@ -1,12 +1,9 @@
-/**
- * Prototype
- *
- * Creates new objects by cloning an existing prototype object. In JavaScript, this is natively
- * supported through prototypal inheritance using 'Object.create' to delegate property lookups
- * without needing class inheritance.
- *
- * Output: Proceed? (Yes) (No)
- */
+// Prototype
+// - Creates new objects by cloning an existing prototype object. In JavaScript, this is natively
+//   supported through prototypal inheritance using 'Object.create' to delegate property lookups
+//   without needing class inheritance.
+// - Output: Proceed? (Yes) (No)
+
 const buttonPrototype = {
     label: 'Click',
     render() {

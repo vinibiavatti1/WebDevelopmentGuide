@@ -1,19 +1,17 @@
-/**
- * Composite
- *
- * Composes objects into tree structures to represent part-whole hierarchies, letting clients treat
- * individual objects and compositions uniformly. In JavaScript, we can implement this functionally
- * by returning objects that expose a common interface and recursively process nested collections.
- *
- * Output:
- * root/
- *   src/
- *     main.js
- *     test.js
- *   res/
- *     img.png
- *     ico.png
- */
+// Composite
+// - Composes objects into tree structures to represent part-whole hierarchies, letting clients
+//   treat individual objects and compositions uniformly. In JavaScript, we can implement this
+//   functionally by returning objects that expose a common interface and recursively process nested
+//   collections.
+// - Output:
+//   root/
+//     src/
+//       main.js
+//       test.js
+//     res/
+//       img.png
+//       ico.png
+
 const createFile = name => ({
     render: (indent = '') => console.log(indent + name)
 })
