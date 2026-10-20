@@ -1,0 +1,51 @@
+<!-- Script Loading -->
+<!-- Explains the different ways to include and execute JavaScript in HTML documents. -->
+<!-- Demonstrates execution timing, blocking behavior (parser-blocking vs async/defer), and ES -->
+<!-- Module support. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Guide</title>
+
+    <!-- Defer Script -->
+    <!-- Downloads in background during HTML parsing and executes sequentially after the DOM is -->
+    <!-- fully parsed. -->
+    <script src="../.resources/script.js" defer></script>
+
+    <!-- Async Script -->
+    <!-- Downloads asynchronously in background and executes immediately upon download, pausing -->
+    <!-- HTML parsing. -->
+    <script src="../.resources/script.js" async></script>
+
+    <!-- ES External Modules Script -->
+    <!-- Loads an ES Module file asynchronously (behaves like defer by default) and supports -->
+    <!-- native import/export statements. -->
+    <script type="module" src="../.resources/script.js"></script>
+</head>
+
+<body>
+    <main></main>
+
+    <!-- Standard Inline Script -->
+    <!-- Executes immediately during HTML parsing, blocking DOM construction until completion. -->
+    <script>
+        console.log('Inline script execution')
+    </script>
+
+    <!-- Standard External Script -->
+    <!-- Pauses HTML parsing to download and execute the script file synchronously. -->
+    <script src="../.resources/script.js"></script>
+
+    <!-- ES Module Inline Script -->
+    <!-- Executes inline JavaScript as a module with strict mode enabled and its own top-level -->
+    <!-- scope. -->
+    <script type="module">
+        import { greet } from '../.resources/module.js'
+        greet()
+    </script>
+</body>
+
+</html>

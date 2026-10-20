@@ -5,3 +5,5 @@
  */
 
 export default {}
+
+export const greet = () => { }
