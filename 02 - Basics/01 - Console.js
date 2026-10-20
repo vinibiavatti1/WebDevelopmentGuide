@@ -3,6 +3,10 @@
 //   JavaScript console mechanism provided by web browsers.
 // - It outputs directly to standard output (stdout) and standard error (stderr).
 
+//==================================================================================================
+// Operations
+//==================================================================================================
+
 // Log
 // - Outputs informational messages directly to standard output (process.stdout).
 // - Accepts multiple arguments, formatting them with space separation.

@@ -2,10 +2,11 @@
 // - Provides an interface for reading data from a readable stream (such as process.stdin) line by
 //   line.
 
-// Import
-// - Imports the promise-based readline interface from Node.js core.
-
 import { createInterface } from 'node:readline/promises'
+
+//==================================================================================================
+// Operations
+//==================================================================================================
 
 // Create Interface
 // - Initializes the readline instance by passing input and output streams as an options object.

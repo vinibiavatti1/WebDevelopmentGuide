@@ -3,6 +3,10 @@
 // - In modern JavaScript (ES6+), we use declarations like 'let' to manage variable scopes safely,
 //   while 'var' is the legacy function-scoped way of declaring variables.
 
+//==================================================================================================
+// Declaration
+//==================================================================================================
+
 // Let
 // - Declares a block-scoped local variable, optionally initializing it to a value.
 // - Output: 1
