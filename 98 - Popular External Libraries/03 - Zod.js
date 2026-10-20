@@ -1,33 +1,28 @@
-/**
- * Zod
- *
- * A TypeScript-first schema declaration and validation library with static type inference, designed
- * to validate unknown data inputs safely at runtime.
- *
- * Note: This document covers only the most common and widely-used features of the library. For
- * advanced configurations, additional methods, and complete API references, please consult the
- * official documentation.
- */
+// Zod
+// - A TypeScript-first schema declaration and validation library with static type inference,
+//   designed to validate unknown data inputs safely at runtime.
+// - Note: This document covers only the most common and widely-used features of the library. For
+//   advanced configurations, additional methods, and complete API references, please consult the
+//   official documentation.
+
 import * as z from 'zod';
 
 //==================================================================================================
 // Object Schema
 //==================================================================================================
 
-/**
- * Creating Object Schema
- * - Defines structured object schemas with typed property shapes.
- */
+// Creating Object Schema
+// - Defines structured object schemas with typed property shapes.
+
 const userSchema = z.object({
     name: z.string(),
     age: z.int().positive()
 })
 
-/**
- * Parse
- * - Validates input data and returns the parsed result, throwing an error on failure.
- * - Output: { name: 'John', age: 30 }
- */
+// Parse
+// - Validates input data and returns the parsed result, throwing an error on failure.
+// - Output: { name: 'John', age: 30 }
+
 try {
     const user = userSchema.parse({ name: 'John', age: 30 })
     console.log(user)
@@ -35,13 +30,12 @@ try {
     // ...
 }
 
-/**
- * Parse Error
- * - Catches ZodError exceptions and inspects detailed issue structures.
- * - Output:
- *   string | invalid_type | [ 'name' ] | Invalid input: expected string, received number
- *   number | invalid_type | [ 'age' ] | Invalid input: expected number, received string
- */
+// Parse Error
+// - Catches ZodError exceptions and inspects detailed issue structures.
+// - Output:
+//   string | invalid_type | [ 'name' ] | Invalid input: expected string, received number
+//   number | invalid_type | [ 'age' ] | Invalid input: expected number, received string
+
 try {
     const user = userSchema.parse({ name: 30, age: 'John' })
 } catch (err) {
@@ -52,23 +46,21 @@ try {
     }
 }
 
-/**
- * Safe Parse
- * - Validates input data without throwing exceptions, returning a result object.
- * - Output: { name: 'John', age: 30 }
- */
+// Safe Parse
+// - Validates input data without throwing exceptions, returning a result object.
+// - Output: { name: 'John', age: 30 }
+
 let userResult = userSchema.safeParse({ name: 'John', age: 30 })
 if (userResult.success) {
     console.log(userResult.data)
 }
 
-/**
- * Safe Parse Error
- * - Inspects errors returned directly from safeParse result objects.
- * - Output:
- *   string | invalid_type | [ 'name' ] | Invalid input: expected string, received number
- *   number | invalid_type | [ 'age' ] | Invalid input: expected number, received string
- */
+// Safe Parse Error
+// - Inspects errors returned directly from safeParse result objects.
+// - Output:
+//   string | invalid_type | [ 'name' ] | Invalid input: expected string, received number
+//   number | invalid_type | [ 'age' ] | Invalid input: expected number, received string
+
 userResult = userSchema.safeParse({
     name: 30,
     age: 'John'
@@ -84,9 +76,11 @@ if (userResult) {
 //==================================================================================================
 
 // Boolean
+
 z.boolean()
 
 // Number
+
 z.int()
 z.bigint()
 z.number().gt(5)
@@ -99,6 +93,7 @@ z.number().negative()
 z.number().nonpositive()
 
 // String
+
 z.string().max(5);
 z.string().min(5);
 z.string().length(5);
@@ -115,34 +110,42 @@ z.string().toUpperCase();
 z.string().normalize();
 
 // Date
+
 z.iso.date();
 z.iso.time();
 z.iso.datetime();
 z.iso.duration();
 
 // Array & Tuple
+
 z.array(z.string())
 z.tuple([z.string(), z.number()])
 
 // Union
+
 z.union([z.string(), z.number()])
 
 // Nullable
+
 z.nullable(z.string());
 
 // Coercion
+
 z.coerce.string();  // String(input)
 z.coerce.number();  // Number(input)
 z.coerce.boolean(); // Boolean(input)
 z.coerce.bigint();  // BigInt(input)
 
 // Literal
+
 z.literal('x')
 
 // Enum
+
 z.enum(['x', 'y', 'z'])
 
 // Transformation
+
 z.string().trim();
 z.string().toLowerCase();
 z.string().toUpperCase();

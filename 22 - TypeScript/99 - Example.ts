@@ -1,8 +1,6 @@
-/**
- * Example.ts
- * A clean compilation playground for testing TypeScript features. Run "npx tsc" in this directory,
- * and check the generated .js file in .dist folder.
- */
+// Example.ts
+// - A clean compilation playground for testing TypeScript features. Run "npx tsc" in this
+//   directory, and check the generated .js file in .dist folder.
 
 enum Role {
     Admin = 'ADMIN',

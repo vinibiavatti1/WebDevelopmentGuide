@@ -1,8 +1,6 @@
-/**
- * Example.ts
- * A clean compilation playground for testing TypeScript features. Run "npx tsc" in this directory,
- * and check the generated .js file in .dist folder.
- */
+// Example.ts
+// - A clean compilation playground for testing TypeScript features. Run "npx tsc" in this
+//   directory, and check the generated .js file in .dist folder.
 var Role;
 (function (Role) {
     Role["Admin"] = "ADMIN";
