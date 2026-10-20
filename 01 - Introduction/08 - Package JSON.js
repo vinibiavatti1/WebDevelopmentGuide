@@ -1,122 +1,98 @@
-/**
- * Package JSON
- *
- * The 'package.json' file is the heart of any Node.js project or npm package. It acts as a manifest
- * file that holds metadata about the project and dictates how the project is handled, configured,
- * and executed by npm.
- *
- * It lists the dependencies required by the project, specifies configuration metadata, and defines
- * script shortcuts for running tests, builds, and servers.
- *
- * To generate this file interactively, the "npm init" command is used.
- *
- * Companion File: package-lock.json
- * - While package.json uses version ranges (like ^4.19.2) to specify allowed updates, the
- *   'package-lock.json' file is automatically generated and locked by npm.
- * - It records the exact, precise version of every installed dependency and sub-dependency,
- *   guaranteeing that anyone else cloning or deploying the project gets the exact same code tree.
- */
+// Package JSON
+// - The 'package.json' file is the heart of any Node.js project or npm package. It acts as a
+//   manifest file that holds metadata about the project and dictates how the project is handled,
+//   configured, and executed by npm.
+// - It lists the dependencies required by the project, specifies configuration metadata, and
+//   defines script shortcuts for running tests, builds, and servers.
+// - To generate this file interactively, the "npm init" command is used.
+// - Companion File: package-lock.json
+//   - While package.json uses version ranges (like ^4.19.2) to specify allowed updates, the
+//     'package-lock.json' file is automatically generated and locked by npm.
+//   - It records the exact, precise version of every installed dependency and sub-dependency,
+//     guaranteeing that anyone else cloning or deploying the project gets the exact same code tree.
 
-/**
- * Example of a standard package.json file content:
- */
-`
-{
-    "name": "my-node-project",
-    "version": "1.0.0",
-    "description": "A simple learning project",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "dependencies": {
-        "express": "^4.19.2"
-    },
-    "devDependencies": {
-        "nodemon": "^3.1.0"
-    },
-    "engines": {
-        "node": ">=18.0.0"
-    }
-}
-`;
+//==================================================================================================
+// Example
+//==================================================================================================
 
-/**
- * Name
- * - Defines the unique name of the project or package.
- * - Must be lowercase, URL-friendly, and without spaces.
- */
-'"name": "my-node-project"'
+// Example of a standard package.json file content:
+// {
+//     "name": "my-node-project",
+//     "version": "1.0.0",
+//     "description": "A simple learning project",
+//     "main": "index.js",
+//     "type": "module",
+//     "scripts": {
+//         "start": "node index.js"
+//     },
+//     "dependencies": {
+//         "express": "^4.19.2"
+//     },
+//     "devDependencies": {
+//         "nodemon": "^3.1.0"
+//     },
+//     "engines": {
+//         "node": ">=18.0.0"
+//     }
+// }
 
-/**
- * Version
- * - Defines the current version of the project.
- * - Follows Semantic Versioning (SemVer) rules (MAJOR.MINOR.PATCH).
- */
-'"version": "1.0.0"'
+//==================================================================================================
+// Properties
+//==================================================================================================
 
-/**
- * Description
- * - A short summary string of what the project does.
- * - Displayed in the npm registry search results if published.
- */
-'"description": "A simple learning project"';
+// Name
+// - Defines the unique name of the project or package.
+// - Must be lowercase, URL-friendly, and without spaces.
+// - Example: "name": "my-node-project"
 
-/**
- * Main
- * - The primary entry point file where application execution starts.
- * - Commonly named index.js or app.js.
- */
-'"main": "index.js"';
+// Version
+// - Defines the current version of the project.
+// - Follows Semantic Versioning (SemVer) rules (MAJOR.MINOR.PATCH).
+// - Example: "version": "1.0.0"
 
-/**
- * Type
- * - Defines the module format that Node.js should use for JavaScript files.
- * - Setting it to "module" enables native ECMAScript Modules (ESM), allowing the use of 'import'
- *   and 'export' instead of legacy CommonJS 'require()'.
- */
-'"type": "module"';
+// Description
+// - A short summary string of what the project does.
+// - Displayed in the npm registry search results if published.
+// - Example: "description": "A simple learning project"
 
-/**
- * Scripts
- * - Custom shell command shortcuts.
- * - Executed via npm run <script-name> (or special shortcuts like npm start).
- */
-`
-"scripts": {
-    "start": "node index.js"
-}
-`;
+// Main
+// - The primary entry point file where application execution starts.
+// - Commonly named index.js or app.js.
+// - Example: "main": "index.js"
 
-/**
- * Dependencies
- * - Production dependencies required for the application to run successfully in production.
- */
-`
-"dependencies": {
-    "express": "^4.19.2"
-}
-`;
+// Type
+// - Defines the module format that Node.js should use for JavaScript files.
+// - Setting it to "module" enables native ECMAScript Modules (ESM), allowing the use of 'import'
+//   and 'export' instead of legacy CommonJS 'require()'.
+// - Example: "type": "module"
 
-/**
- * Dev Dependencies
- * - Development-only dependencies required during development, testing, or building.
- */
-`
-"devDependencies": {
-    "nodemon": "^3.1.0"
-}
-`;
+// Scripts
+// - Custom shell command shortcuts.
+// - Executed via npm run <script-name> (or special shortcuts like npm start).
+// - Example:
+//   "scripts": {
+//       "start": "node index.js"
+//   }
 
-/**
- * Engines
- * - Defines the compatible Node.js version range required to run the project.
- * - Note: This property is completely optional and often omitted in smaller or
- *   standard projects.
- */
-`
-"engines": {
-    "node": ">=18.0.0"
-}
-`;
+// Dependencies
+// - Production dependencies required for the application to run successfully in production.
+// - Example:
+//   "dependencies": {
+//       "express": "^4.19.2"
+//   }
+
+// Dev Dependencies
+// - Development-only dependencies required during development, testing, or building.
+// - Example:
+//   "devDependencies": {
+//       "nodemon": "^3.1.0"
+//   }
+
+// Engines
+// - Defines the compatible Node.js version range required to run the project.
+// - Note: This property is completely optional and often omitted in smaller or
+//   standard projects.
+// - Example:
+//   "engines": {
+//       "node": ">=18.0.0"
+//   }

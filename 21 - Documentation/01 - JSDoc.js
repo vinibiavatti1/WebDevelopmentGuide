@@ -1,9 +1,6 @@
-/**
- * JSDoc
- *
- * A formal documentation syntax used within comments to describe functions, variables, and types,
- * enabling IDE type-checking and autocompletion.
- */
+// JSDoc
+// - A formal documentation syntax used within comments to describe functions, variables, and types,
+//   enabling IDE type-checking and autocompletion.
 
 //==================================================================================================
 // TypeScript Check
@@ -19,20 +16,19 @@
 // Enable TS Check Globally
 // - To enable type checking globally across your entire project without adding the directive to
 //   every file, create a "jsconfig.json" file at the project root:
-`
-{
-    "compilerOptions": {
-        "checkJs": true,
-        "strict": true
-    }
-}
-`
+// - Example:
+//   {
+//       "compilerOptions": {
+//           "checkJs": true,
+//           "strict": true
+//       }
+//   }
 
 //==================================================================================================
 // Variables & Constants
 //==================================================================================================
 
-// Primitive Type
+// Primitive types
 
 /**
  * User name.
@@ -89,7 +85,7 @@ let userData = {
     age: 30
 }
 
-// Readonly Objects
+// Readonly objects
 
 /**
  * Config object.
@@ -114,10 +110,10 @@ const Colors = Object.freeze({
 })
 
 //==================================================================================================
-// Function & Methods
+// Functions & Methods
 //==================================================================================================
 
-// Function
+// Functions
 
 /**
  * Calculates the sum of two numbers.
@@ -129,7 +125,7 @@ function sum(x, y) {
     return x + y
 }
 
-// Function with Exception
+// Functions with exceptions
 
 /**
  * Calculates the division of two numbers.
@@ -145,7 +141,7 @@ function div(x, y) {
     return x / y
 }
 
-// Async Function (Promise)
+// Async functions (Promises)
 
 /**
  * Fetches the user data.
@@ -157,7 +153,7 @@ async function fetchUserName(userId) {
     return response.text()
 }
 
-// Function with Callback
+// Functions with callbacks
 
 /**
  * Open a file.
@@ -169,7 +165,7 @@ function openFile(name, callback) {
     callback(content)
 }
 
-// Function with Callback (As Arrow Function)
+// Functions with callbacks (as arrow function)
 
 /**
  * Reads the file content.
@@ -185,7 +181,7 @@ function readFile(name, callback) {
 // Type Definition
 //==================================================================================================
 
-// Custom Type Definition
+// Custom type definition
 
 /**
  * Define the User type.
@@ -195,7 +191,7 @@ function readFile(name, callback) {
  * @property {function(): boolean} isOverage True if the age > 18.
  */
 
-// Using Custom Type Definition
+// Using custom type definition
 
 /**
  * Registers the user in the database.
@@ -211,7 +207,7 @@ function registerUser(user) {
 // Callbacks
 //==================================================================================================
 
-// Callback Definition
+// Callback definition
 
 /**
  * Define the ProcessFileContent callback.
@@ -219,7 +215,7 @@ function registerUser(user) {
  * @param {string} content The file content.
  */
 
-// Using Callback Definition
+// Using callback definition
 
 /**
  * Reads the document content.
@@ -235,7 +231,7 @@ function readDocument(name, callback) {
 // Generics (Templates)
 //==================================================================================================
 
-// Generics
+// Defining types with generics
 
 /**
  * Retrieves the first element from the array.
@@ -251,7 +247,7 @@ function getFirstElement(array) {
 // Importing Types
 //==================================================================================================
 
-// Import
+// Importing types
 
 /**
  * Check if the employee has the admin role.
@@ -266,7 +262,7 @@ function isAdmin(employee) {
 // Inline Type Casting
 //==================================================================================================
 
-// Re-using Type
+// Re-using types
 
 /**
  * @type {isAdmin}
@@ -275,7 +271,7 @@ function isAdministrator(employee) {
     return employee.role === 'admin'
 }
 
-// Re-using Type from Type Definition
+// Re-using property from type definition
 
 /**
  * @type {User['isOverage']}
