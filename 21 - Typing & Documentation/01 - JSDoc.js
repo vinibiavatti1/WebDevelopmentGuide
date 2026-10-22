@@ -29,50 +29,51 @@
 //==================================================================================================
 
 // Primitive types
+// - Annotates a variable with a primitive data type like string, number, or boolean.
+// - Output: John
 
-/**
- * User name.
- * @type {string}
- */
+/** @type {string} */
 let userName = 'John'
+console.log(userName)
 
 // Union
+// - Allows a variable to accept multiple distinct types using the pipe (|) operator.
+// - Output: 1
 
-/**
- * User id.
- * @type {number | string}
- */
+/** @type {number | string} */
 let userId = 1
+console.log(userId)
 
 // Lists
+// - Specifies an array type containing elements of a specific data type followed by brackets ([]).
+// - Output: [ 'A', 'B', 'C' ]
 
-/**
- * List of values.
- * @type {string[]}
- */
+/** @type {string[]} */
 let values = ['A', 'B', 'C']
+console.log(values)
 
 // Tuples
+// - Defines an array with a fixed number of elements where each element has a specific type.
+// - Output: [ 1, 2 ]
 
-/**
- * Point 2D.
- * @type {[number, number]}
- */
+/** @type {[number, number]} */
 let point = [1, 2]
+console.log(point)
 
 // Constants
+// - Declares a read-only constant variable with an explicit type annotation.
+// - Output: http://api.dev
 
-/**
- * API base url.
- * @const {string}
- */
+/** @const {string} */
 const BASE_URL = 'http://api.dev'
+console.log(BASE_URL)
 
 //==================================================================================================
 // Objects & Enums
 //==================================================================================================
 
 // Objects
+// - Documents a generic object structure with explicitly typed property keys.
 
 /**
  * User data.
@@ -86,6 +87,7 @@ let userData = {
 }
 
 // Readonly objects
+// - Defines a frozen object configuration whose properties cannot be modified after initialization.
 
 /**
  * Config object.
@@ -97,6 +99,7 @@ const CONFIG = Object.freeze({
 })
 
 // Enums
+// - Defines a set of named constant values using Object.freeze and the @enum annotation.
 
 /**
  * Colors enumeration.
@@ -114,6 +117,7 @@ const Colors = Object.freeze({
 //==================================================================================================
 
 // Functions
+// - Documents function parameters and return types to provide strict IntelliSense support.
 
 /**
  * Calculates the sum of two numbers.
@@ -126,6 +130,7 @@ function sum(x, y) {
 }
 
 // Functions with exceptions
+// - Documents potential errors thrown during execution using the @throws annotation.
 
 /**
  * Calculates the division of two numbers.
@@ -142,6 +147,7 @@ function div(x, y) {
 }
 
 // Async functions (Promises)
+// - Documents asynchronous functions that return a Promise wrapped around a specific type.
 
 /**
  * Fetches the user data.
@@ -149,11 +155,11 @@ function div(x, y) {
  * @returns {Promise<string>} The user name.
  */
 async function fetchUserName(userId) {
-    const response = await fetch('http://api.dev')
-    return response.text()
+    return 'http://api.dev'
 }
 
 // Functions with callbacks
+// - Documents higher-order functions taking a callback parameter using function type signatures.
 
 /**
  * Open a file.
@@ -166,6 +172,7 @@ function openFile(name, callback) {
 }
 
 // Functions with callbacks (as arrow function)
+// - Documents higher-order functions using arrow function syntax within JSDoc parameter annotations.
 
 /**
  * Reads the file content.
@@ -182,6 +189,7 @@ function readFile(name, callback) {
 //==================================================================================================
 
 // Custom type definition
+// - Creates a reusable custom composite type using the @typedef annotation.
 
 /**
  * Define the User type.
@@ -192,6 +200,7 @@ function readFile(name, callback) {
  */
 
 // Using custom type definition
+// - Applies a custom typedef to function parameters for clean structural type checking.
 
 /**
  * Registers the user in the database.
@@ -204,10 +213,45 @@ function registerUser(user) {
 }
 
 //==================================================================================================
+// Classes and Interfaces
+//==================================================================================================
+
+// Interface
+// - Defines a base class where the @abstract annotation identifies methods that must be overridden.
+
+/**
+ * Abstract base person class.
+ * @abstract
+ */
+class AbstractPerson {
+
+    /** @abstract */
+    getName() {
+        throw new Error('Not implemented')
+    }
+}
+
+// Implementation
+// - Implements an abstract base class or interface contract using the @implements annotation.
+
+/**
+ * Concrete person class.
+ * @implements {AbstractPerson}
+ */
+class Person {
+
+    getName() {
+        return 'John'
+    }
+}
+const person = new Person()
+
+//==================================================================================================
 // Callbacks
 //==================================================================================================
 
 // Callback definition
+// - The @callback annotation can be used to create a new callback function type definition.
 
 /**
  * Define the ProcessFileContent callback.
@@ -216,6 +260,7 @@ function registerUser(user) {
  */
 
 // Using callback definition
+// - Using the callback name identifies the type of the variable.
 
 /**
  * Reads the document content.
@@ -232,6 +277,7 @@ function readDocument(name, callback) {
 //==================================================================================================
 
 // Defining types with generics
+// - Parameterizes functions using the @template annotation to accept and return flexible types.
 
 /**
  * Retrieves the first element from the array.
@@ -248,6 +294,7 @@ function getFirstElement(array) {
 //==================================================================================================
 
 // Importing types
+// - Imports external type definitions from external modules or files using the import() syntax.
 
 /**
  * Check if the employee has the admin role.
@@ -255,7 +302,7 @@ function getFirstElement(array) {
  * @returns {boolean} True if the employee has the admin role.
  */
 function isAdmin(employee) {
-    return employee.role === 'admin'
+    return employee?.role === 'admin'
 }
 
 //==================================================================================================
@@ -263,15 +310,18 @@ function isAdmin(employee) {
 //==================================================================================================
 
 // Re-using types
+// - References an existing function or type signature using the @type annotation.
 
 /**
  * @type {isAdmin}
  */
 function isAdministrator(employee) {
-    return employee.role === 'admin'
+    return employee?.role === 'admin'
 }
 
 // Re-using property from type definition
+// - Accesses specific property types directly from existing complex type definitions using bracket
+//   notation.
 
 /**
  * @type {User['isOverage']}
