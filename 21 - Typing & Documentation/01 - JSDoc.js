@@ -218,6 +218,7 @@ function registerUser(user) {
 
 // Interface
 // - Defines a base class where the @abstract annotation identifies methods that must be overridden.
+// - The @virtual annotation identifies methods that can be optionally overridden.
 
 /**
  * Abstract base person class.
@@ -229,6 +230,11 @@ class AbstractPerson {
     getName() {
         throw new Error('Not implemented')
     }
+
+    /** @virtual */
+    getAge() {
+        return null
+    }
 }
 
 // Implementation
@@ -238,7 +244,7 @@ class AbstractPerson {
  * Concrete person class.
  * @implements {AbstractPerson}
  */
-class Person {
+class Person extends AbstractPerson {
 
     getName() {
         return 'John'
