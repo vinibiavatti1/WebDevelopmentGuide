@@ -213,26 +213,35 @@ function registerUser(user) {
 }
 
 //==================================================================================================
-// Classes and Interfaces
+// Interfaces and Abstract Classes
 //==================================================================================================
 
-// Interface
-// - Defines a base class where the @abstract annotation identifies methods that must be overridden.
-// - The @virtual annotation identifies methods that can be optionally overridden.
+// Interfaces
+// - Defines a contract where the @abstract annotation identifies methods that must be implemented.
 
-/**
- * Abstract base person class.
- * @abstract
- */
+/** @interface */
+class Formatable {
+    format() {
+        throw new Error('Not implemented')
+    }
+}
+
+// Abstract Classes
+// - Defines a base class where the @abstract annotation identifies methods that must be override.
+// - The @abstract annotation identifies an abstract class, and methods that must be overridden.
+// - The @virtual annotation identifies methods that can be optionally overridden.
+// - Properties (get & set) can also be marked as @abstract or @virtual.
+
+/** @abstract */
 class AbstractPerson {
 
     /** @abstract */
-    getName() {
+    fullName() {
         throw new Error('Not implemented')
     }
 
     /** @virtual */
-    getAge() {
+    computeAge() {
         return null
     }
 }
@@ -240,14 +249,15 @@ class AbstractPerson {
 // Implementation
 // - Implements an abstract base class or interface contract using the @implements annotation.
 
-/**
- * Concrete person class.
- * @implements {AbstractPerson}
- */
+/** @implements {Formatable} */
 class Person extends AbstractPerson {
 
-    getName() {
-        return 'John'
+    fullName() {
+        return 'John Doe'
+    }
+
+    format() {
+        return 'John Doe'
     }
 }
 const person = new Person()
