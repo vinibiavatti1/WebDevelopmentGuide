@@ -47,16 +47,13 @@ emitter.off('message', handleMessage)
 
 class PaymentService {
     #emitter = new EventEmitter()
-
     processPayment(paymentId) {
         this.#emitter.emit('processed', { paymentId, status: 'success' })
     }
-
     on(event, handler) {
         this.#emitter.on(event, handler)
         return this
     }
-
     off(event, handler) {
         this.#emitter.off(event, handler)
         return this
