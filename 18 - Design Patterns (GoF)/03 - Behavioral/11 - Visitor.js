@@ -1,22 +1,49 @@
 // Visitor
-// - Separates an algorithm from an object structure on which it operates, allowing new operations
-//   to be added without modifying the structures. In JavaScript, we can implement this functionally
-//   by defining operations as lookup tables of functions mapped to element types or tags.
-// - Output:
-//   Export XML: <text>Hello</text> <img src="a.png"/>
-//   Export JSON: {"text":"Hello"} {"img":"a.png"}
+// - Separates algorithms from the object structures on which they operate by introducing a visitor
+//   object, allowing new operations to be added to existing hierarchies without modifying the
+//   classes of the elements they traverse.
 
-const createTextElement = text => ({ type: 'text', text })
-const createImageElement = url => ({ type: 'img', url })
-const xmlVisitor = {
-    text: node => '<text>' + node.text + '</text>',
-    img: node => '<img src="' + node.url + '"/>'
+class TextElement {
+    #text
+    constructor(text) {
+        this.#text = text
+    }
+    accept(visitor) {
+        return visitor.visitText(this)
+    }
+    get text() {
+        return this.#text
+    }
 }
-const jsonVisitor = {
-    text: node => '{"text":"' + node.text + '"}',
-    img: node => '{"img":"' + node.url + '"}'
+
+class ImageElement {
+    #url
+    constructor(url) {
+        this.#url = url
+    }
+    accept(visitor) {
+        return visitor.visitImage(this)
+    }
+    get url() {
+        return this.#url
+    }
 }
-const visit = (elements, visitor) => elements.map(node => visitor[node.type](node)).join(' ')
-const document = [createTextElement('Hello'), createImageElement('a.png')]
-console.log('Export XML:', visit(document, xmlVisitor))
-console.log('Export JSON:', visit(document, jsonVisitor))
+
+class HtmlExportVisitor {
+    visitText(element) {
+        return `<p>${element.text}</p>`
+    }
+    visitImage(element) {
+        return `<img src="${element.url}" />`
+    }
+}
+
+const text = new TextElement('Hello World')
+const img = new ImageElement('http://image.com')
+const visitor = new HtmlExportVisitor()
+console.log(text.accept(visitor))
+console.log(img.accept(visitor))
+
+// Output:
+// <p>Hello World</p>
+// <img src="http://image.com" />

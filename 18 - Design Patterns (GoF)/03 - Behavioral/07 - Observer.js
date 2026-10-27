@@ -1,24 +1,31 @@
 // Observer
-// - Defines a one-to-many dependency between objects so that when one object changes state, all its
-//   dependents are notified automatically. In JavaScript, we can implement this functionally by
-//   maintaining a set of subscriber callbacks inside a closure.
-// - Output: Order processed: { id: 1, status: 'success' }
+// - Establishes a one-to-many subscription mechanism between a subject and multiple dependent
+//   listeners, automatically notifying and updating all observers whenever the subject undergoes
+//   state changes.
 
-const createOrderService = () => {
-    const listeners = new Set()
-    return {
-        subscribe: handler => {
-            listeners.add(handler)
-            return () => listeners.delete(handler)
-        },
-        processOrder: id => {
-            // Process...
-            const event = { id, status: 'success' }
-            for (const handler of listeners) handler(event)
-        }
+class OrderService {
+    #listeners = new Set()
+    subscribe(handler) {
+        this.#listeners.add(handler)
+        return () => this.#listeners.delete(handler)
+    }
+    processOrder(id) {
+        console.log('Order processed!')
+        this.#listeners.forEach(handler => handler.update({ status: 'success' }))
     }
 }
-const orderService = createOrderService()
-const unsubscribe = orderService.subscribe(data => console.log('Order processed:', data))
+
+class MetricsService {
+    update(data) {
+        console.log('Metrics Service Received:', data.status)
+    }
+}
+
+const orderService = new OrderService()
+const metricsService = new MetricsService()
+orderService.subscribe(metricsService)
 orderService.processOrder(1)
-unsubscribe()
+
+// Output:
+// Order processed!
+// Metrics Service Received: success

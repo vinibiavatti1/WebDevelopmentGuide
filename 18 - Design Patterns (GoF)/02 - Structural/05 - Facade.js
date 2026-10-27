@@ -1,27 +1,48 @@
 // Facade
-// - Provides a simplified interface to a complex subsystem of interfaces or objects. In JavaScript,
-//   we can implement this functionally by wrapping calls to multiple subsystem functions or
-//   services inside a single unified orchestrator function.
-// - Output:
-//   Checking stock for item: Computer
-//   Processing 4000 from John
-//   Shipping Computer to Main Street 123
+// - Provides a simplified, high-level interface to a complex subsystem of classes, frameworks, or
+//   libraries, shielding client code from intricate internal dependencies and low-level wiring.
 
-const inventoryService = {
-    checkStock: item => console.log('Checking stock for item:', item)
-}
-const paymentService = {
-    processPayment: (amount, customer) => console.log('Processing', amount, 'from', customer)
-}
-const shippingService = {
-    shipItem: (item, address) => console.log('Shipping', item, 'to', address)
-}
-const createOrderService = ({ inventoryService, paymentService, shippingService }) => ({
-    processOrder: (item, amount, customer, address) => {
-        inventoryService.checkStock(item)
-        paymentService.processPayment(amount, customer)
-        shippingService.shipItem(item, address)
+class InventoryService {
+    checkStock(item) {
+        console.log('Checking stock for item:', item)
     }
-})
-const orderService = createOrderService({ inventoryService, paymentService, shippingService })
-orderService.processOrder('Computer', 4000, 'John', 'Main Street 123')
+}
+
+class PaymentService {
+    processPayment(amount, customer) {
+        console.log('Processing', amount, 'from', customer)
+    }
+}
+
+class ShippingService {
+    shipItem(item, address) {
+        console.log('Shipping', item, 'to', address)
+    }
+}
+
+class OrderService { // <- Facade
+    #inventoryService
+    #paymentService
+    #shippingService
+    constructor(inventoryService, paymentService, shippingService) {
+        this.#inventoryService = inventoryService
+        this.#paymentService = paymentService
+        this.#shippingService = shippingService
+    }
+    processOrder(item, amount, customer, address) {
+        this.#inventoryService.checkStock(item)
+        this.#paymentService.processPayment(amount, customer)
+        this.#shippingService.shipItem(item, address)
+    }
+}
+
+new OrderService(
+    new InventoryService(),
+    new PaymentService(),
+    new ShippingService()
+).processOrder('Computer', 4000, 'John', 'Main Street 123')
+
+// Output:
+// Checking stock for item: Computer
+// Processing 4000 from John
+// Shipping Computer to Main Street 123

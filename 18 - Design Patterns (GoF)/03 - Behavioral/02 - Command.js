@@ -1,26 +1,46 @@
 // Command
-// - Encapsulates a request as an object or function, letting you parameterize clients with
-//   different requests, queue or log operations, and support undoable actions. In JavaScript, we
-//   can implement this functionally using first-class functions or simple action objects with
-//   execute and undo methods.
-// - Output: File Opened | File Saved | File Closed
+// - Encapsulates a request as a standalone object containing all information needed to execute or
+//   queue an action, enabling operation parametrization, undoable actions, and macro recording.
 
-const editor = {
-    openFile: () => console.log('File Opened'),
-    saveFile: () => console.log('File Saved'),
-    closeFile: () => console.log('File Closed'),
+class ImageProcessor {
+    resize(width, height) {
+        console.log('Resizing...', width, 'x', height)
+    }
+    export(destination) {
+        console.log('Exporting...', destination)
+    }
 }
-const openCommand = () => editor.openFile()
-const saveCommand = () => editor.saveFile()
-const closeCommand = () => editor.closeFile()
-const createToolBar = (actions = {}) => ({
-    click: (name) => actions[name]?.()
-})
-const toolBar = createToolBar({
-    open: openCommand,
-    save: saveCommand,
-    close: closeCommand
-})
-toolBar.click('open')
-toolBar.click('save')
-toolBar.click('close')
+
+class ResizeCommand {
+    #receiver
+    #width
+    #height
+    constructor(receiver, width, height) {
+        this.#receiver = receiver;
+        this.#width = width;
+        this.#height = height;
+    }
+    execute() {
+        this.#receiver.resize(this.#width, this.#height);
+    }
+}
+
+class ExportCommand {
+    #receiver
+    #destination
+    constructor(receiver, destination) {
+        this.#receiver = receiver;
+        this.#destination = destination;
+    }
+    execute() {
+        this.#receiver.export(this.#destination);
+    }
+}
+
+const imgProcessor = new ImageProcessor()
+new ResizeCommand(imgProcessor, 800, 600).execute()
+new ExportCommand(imgProcessor, 'C:/images').execute()
+
+// Output:
+// Resizing... 800 x 600
+// Exporting... C:/images

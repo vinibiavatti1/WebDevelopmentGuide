@@ -1,18 +1,36 @@
 // Prototype
-// - Creates new objects by cloning an existing prototype object. In JavaScript, this is natively
-//   supported through prototypal inheritance using 'Object.create' to delegate property lookups
-//   without needing class inheritance.
-// - Output: Proceed? (Yes) (No)
+// - Creates new objects by cloning existing instances, bypassing the cost of traditional
+//   instantiation and allowing dynamic configuration at runtime.
 
-const buttonPrototype = {
-    label: 'Click',
-    render() {
-        return `(${this.label})`
+class Button {
+    #label
+    #edges
+    constructor(label, edges) {
+        this.#label = label
+        this.#edges = edges
+    }
+    static clone(button) {
+        return new Button(button.label, structuredClone(button.edges))
+    }
+    markup() {
+        return `${this.#edges[0]}${this.#label}${this.#edges[1]}`
+    }
+    withLabel(label) {
+        this.#label = label
+        return this
+    }
+    get label() {
+        return this.#label
+    }
+    get edges() {
+        return this.#edges
     }
 }
-const createButtonFromPrototype = (proto, overrides = {}) => Object.assign(
-    Object.create(proto), overrides
-)
-const yesButton = createButtonFromPrototype(buttonPrototype, { label: 'Yes' })
-const noButton = createButtonFromPrototype(buttonPrototype, { label: 'No' })
-console.log('Proceed?', yesButton.render(), noButton.render())
+
+const yesBtn = new Button('Yes', ['[', ']'])
+const noBtn = Button.clone(yesBtn).withLabel('No')
+const cancelBtn = Button.clone(yesBtn).withLabel('Cancel')
+console.log('Proceed?', yesBtn.markup(), noBtn.markup(), cancelBtn.markup())
+
+// Output:
+// Proceed? [Yes] [No] [Cancel]

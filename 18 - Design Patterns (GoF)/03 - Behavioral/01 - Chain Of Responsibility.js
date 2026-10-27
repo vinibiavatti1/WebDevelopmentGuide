@@ -1,11 +1,51 @@
 // Chain Of Responsibility
-// - Avoids coupling the sender of a request to its receiver by giving more than one object a chance
-//   to handle the request. In JavaScript, we can implement this functionally by executing an array
-//   of handler functions in sequence until a handler halts the pipeline.
-// - Output: HELLO WORLD
+// - Passes requests along a dynamic chain of handler objects until one of them handles the request
+//   or it reaches the end of the pipeline, decoupling the sender from multiple potential receivers.
 
-const pipe = (...fns) => data => fns.reduce((acc, fn) => fn(acc), data)
-const trimHandler = data => data.trim()
-const toUpperHandler = data => data.toUpperCase()
-const pipeline = pipe(trimHandler, toUpperHandler)
-console.log(pipeline(' hello world '))
+class TextProcessor {
+    constructor(next) {
+        this.next = next
+    }
+    process(text) {
+        throw new Error('Not implemented')
+    }
+}
+
+class TrimProcessor extends TextProcessor {
+    constructor(next) {
+        super(next)
+    }
+    process(text) {
+        text = text.trim()
+        return this.next ? this.next.process(text) : text
+    }
+}
+class UpperProcessor extends TextProcessor {
+    constructor(next) {
+        super(next)
+    }
+    process(text) {
+        text = text.toUpperCase()
+        return this.next ? this.next.process(text) : text
+    }
+}
+class DotProcessor extends TextProcessor {
+    constructor(next) {
+        super(next)
+    }
+    process(text) {
+        text = text + '.'
+        return this.next ? this.next.process(text) : text
+    }
+}
+
+const textProcessor =
+    new TrimProcessor(
+        new UpperProcessor(
+            new DotProcessor(null)
+        )
+    )
+const text = textProcessor.process(' hello world ')
+console.log(text)
+
+// Output: HELLO WORLD.

@@ -1,39 +1,58 @@
 // Mediator
-// - Defines an object that encapsulates how a set of objects interact, preventing components from
-//   referencing each other explicitly. In JavaScript, we can implement this functionally by passing
-//   a central mediator closure or message hub to component factories.
-// - Output:
-//   Alice sends: Hello everyone!
-//   Bob received: Hello everyone!
-//   Charlie received: Hello everyone!
+// - Encapsulates and centralizes complex communication pathways and coordination workflows between
+//   multiple objects, preventing tight coupling by ensuring they communicate exclusively through
+//   the intermediary.
 
-const createChatMediator = () => {
-    const colleagues = []
-    return {
-        register: (colleague) => {
-            colleagues.push(colleague)
-        },
-        send: (sender, message) => {
-            console.log(sender.name + ' sends: ' + message)
-            for (const colleague of colleagues) {
-                if (colleague !== sender) {
-                    colleague.receive(message)
-                }
-            }
+class Form {
+    #textarea
+    #resetButton
+    constructor() {
+        this.#textarea = new Textarea(this)
+        this.#resetButton = new Button(this)
+    }
+    notify(event) {
+        console.log('Processing event:', event)
+        if (event === 'reset') {
+            this.#textarea.text = '(empty)'
         }
     }
-}
-const createColleague = (name, mediator) => {
-    const colleague = {
-        name,
-        send: (message) => mediator.send(colleague, message),
-        receive: (message) => console.log(name + ' received: ' + message)
+    get textarea() {
+        return this.#textarea
     }
-    mediator.register(colleague)
-    return colleague
+    get resetButton() {
+        return this.#resetButton
+    }
 }
-const mediator = createChatMediator()
-const alice = createColleague('Alice', mediator)
-const bob = createColleague('Bob', mediator)
-const charlie = createColleague('Charlie', mediator)
-alice.send('Hello everyone!')
+
+class Textarea {
+    #text = '(empty)'
+    #mediator
+    constructor(mediator) {
+        this.#mediator = mediator
+    }
+    set text(text) {
+        this.#text = text
+    }
+    get text() {
+        return this.#text
+    }
+}
+
+class Button {
+    #mediator
+    constructor(mediator) {
+        this.#mediator = mediator
+    }
+    click() {
+        this.#mediator.notify('reset')
+    }
+}
+
+const form = new Form()
+form.textarea.text = 'Hello World'
+form.resetButton.click()
+console.log(form.textarea.text)
+
+// Output:
+// Processing event: reset
+// (empty)

@@ -1,17 +1,31 @@
 // Factory Method
-// - Provides an interface for creating objects, allowing the specific type of object to be decided
-//   at runtime. In JavaScript, we can implement this functionally using factory functions that map
-//   types to specific creation logic.
-// - Output: Are you sure? (Yes) (No)
+// - Delegates object creation to subclasses by defining a common interface, allowing concrete
+//   classes to decide which specific type to instantiate.
 
-const createButton = (label, type) => {
-    const types = {
-        flat: (x) => `[${x}]`,
-        round: (x) => `(${x})`,
+class Dialog {
+    buildButton(label) { // <- Factory Method
+        throw new Error('Not implemented')
     }
-    return types[type](label)
+    show() {
+        console.log('Are you sure?', this.buildButton('Yes'), this.buildButton('No'))
+    }
 }
-const renderDialog = (message, type) => console.log(
-    message, createButton('Yes', type), createButton('No', type)
-)
-renderDialog('Are you sure?', 'round')
+
+class FlatDialog extends Dialog {
+    buildButton(label) {
+        return `[${label}]`
+    }
+}
+
+class RoundedDialog extends Dialog {
+    buildButton(label) {
+        return `(${label})`
+    }
+}
+
+new FlatDialog().show()
+new RoundedDialog().show()
+
+// Output:
+// Are you sure? (Yes) (No)
+// Are you sure? (Yes) (No)

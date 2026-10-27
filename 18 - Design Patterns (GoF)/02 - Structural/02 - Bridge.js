@@ -1,18 +1,27 @@
 // Bridge
-// - Decouples an abstraction from its implementation so that the two can vary independently. In
-//   JavaScript, we can implement this functionally by injecting implementation functions directly
-//   into higher-order factory functions.
-// - Output:
-//   [SMS to john] Alert: Server is down
-//   [EMAIL to john] Alert: Server is down
+// - Separates an abstraction layer from its implementation hierarchy, allowing both dimensions to
+//   evolve independently through clean composition and delegation rather than rigid class
+//   inheritance.
 
-const sendSms = (to, message) => console.log(`[SMS to ${to}] ${message}`)
-const sendEmail = (to, message) => console.log(`[EMAIL to ${to}] ${message}`)
-// >--- Bridge ---<
-const createNotificationService = sendFn => ({
-    sendAlert: (to, message) => sendFn(to, `Alert: ${message}`),
-})
-const smsService = createNotificationService(sendSms)
-const emailService = createNotificationService(sendEmail)
-smsService.sendAlert('john', 'Server is down')
-emailService.sendAlert('john', 'Server is down')
+
+class ConsoleWriter {
+    write(data) {
+        console.log(data)
+    }
+}
+
+/* >--- Bridge ---< */
+
+class Logger {
+    #consoleWriter
+    constructor(consoleWriter) {
+        this.#consoleWriter = consoleWriter
+    }
+    log(message) {
+        this.#consoleWriter.write(message)
+    }
+}
+
+new Logger(new ConsoleWriter()).log('Hello World')
+
+// Output: Hello World

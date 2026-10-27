@@ -1,29 +1,65 @@
 // Template Method
-// - Defines the skeleton of an algorithm in an operation, deferring some steps to client code. In
-//   JavaScript, we can implement this functionally by accepting step functions as arguments or
-//   configuration objects inside a higher-order pipeline function.
-// - Output:
-//   [JSON] Parsing JSON data... | Saving to DB: { user: 'John' }
-//   [CSV] Parsing CSV rows... | Saving to DB: { user: 'John' }
+// - Defines the skeleton of an algorithm in a base class method while deferring specific
+//   implementation steps to subclasses, allowing derived classes to override exact behaviors
+//   without altering the overarching control flow.
 
-const createDataProcessor = parseStep => {
-    const read = () => 'raw_data'
-    const save = data => console.log('Saving to DB:', data)
-    return {
-        process: () => {
-            const raw = read()
-            const parsed = parseStep(raw)
-            save(parsed)
-        }
+class EnemyAi {
+    turn() {
+        this.createUnits()
+        this.buildStructures()
+        this.collectResources()
+    }
+    createUnits() {
+        console.log('Created units')
+    }
+    buildStructures() {
+        console.log('Built structures')
+    }
+    collectResources() {
+        console.log('Collected resources')
     }
 }
-const jsonProcessor = createDataProcessor(raw => {
-    console.log('[JSON] Parsing JSON data...')
-    return { user: 'John' }
-})
-const csvProcessor = createDataProcessor(raw => {
-    console.log('[CSV] Parsing CSV rows...')
-    return { user: 'John' }
-})
-jsonProcessor.process()
-csvProcessor.process()
+
+class OrcsAi extends EnemyAi {
+    createUnits() {
+        console.log('Created orcs')
+    }
+    buildStructures() {
+        console.log('Built a fort')
+    }
+    collectResources() {
+        console.log('Collected gold')
+    }
+}
+class HumansAi extends EnemyAi {
+    createUnits() {
+        console.log('Created warriors')
+    }
+}
+class ElfsAi extends EnemyAi {
+    createUnits() {
+        console.log('Created elfs')
+    }
+    collectResources() {
+        console.log('Collected wood')
+    }
+}
+
+new OrcsAi().turn()
+console.log('---')
+new HumansAi().turn()
+console.log('---')
+new ElfsAi().turn()
+
+// Output:
+// Created orcs
+// Built a fort
+// Collected gold
+// ---
+// Created warriors
+// Built structures
+// Collected resources
+// ---
+// Created elfs
+// Built structures
+// Collected wood

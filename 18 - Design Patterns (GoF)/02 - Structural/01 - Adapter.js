@@ -1,16 +1,54 @@
 // Adapter
-// - Converts the interface of an existing object into another interface expected by clients. In
-//   JavaScript, we can implement this functionally by wrapping incompatible functions or services
-//   inside a wrapper object that translates interface calls.
-// - Output: log: Hello World | warn: Hello World
+// - Bridges incompatible interfaces by wrapping an existing class, allowing classes to work
+//   together seamlessly without modifying their source code.
 
-const legacyLogger = {
-    log: message => console.log(message)
+class LegacyLogger {
+    log(type, message) {
+        console.log(type, message)
+    }
 }
-const createLegacyLoggerAdapter = legacyLogger => ({
-    log: message => legacyLogger.log(`log: ${message}`),
-    warn: message => legacyLogger.log(`warn: ${message}`)
-})
-const legacyLoggerAdapter = createLegacyLoggerAdapter(legacyLogger)
-legacyLoggerAdapter.log('Hello World')
-legacyLoggerAdapter.warn('Hello World')
+
+class ModernLogger {
+    info(message) {
+        console.log('info:', message)
+    }
+    error(message) {
+        console.log('error:', message)
+    }
+}
+
+class LegacyToModernLoggerAdapter {
+    #legacyLogger
+    constructor(legacyLogger) {
+        this.#legacyLogger = legacyLogger
+    }
+    info(message) {
+        this.#legacyLogger.log('info:', message)
+    }
+    error(message) {
+        this.#legacyLogger.log('error:', message)
+    }
+}
+
+class ModernToLegacyLoggerAdapter {
+    #modernLogger
+    constructor(modernLogger) {
+        this.#modernLogger = modernLogger
+    }
+    log(type, message) {
+        if (type === 'info') {
+            this.#modernLogger.info(message)
+        } else {
+            this.#modernLogger.error(message)
+        }
+    }
+}
+
+const adapter1 = new LegacyToModernLoggerAdapter(new LegacyLogger())
+const adapter2 = new ModernToLegacyLoggerAdapter(new ModernLogger())
+adapter1.info('Hello World')
+adapter2.log('info', 'Hello World')
+
+// Output:
+// info: Hello World
+// info: Hello World

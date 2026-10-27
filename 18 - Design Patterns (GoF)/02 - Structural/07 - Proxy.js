@@ -1,17 +1,30 @@
 // Proxy
-// - Provides a surrogate or placeholder for another object to control access to it. In JavaScript,
-//   we can implement this functionally by wrapping a target function inside a higher-order function
-//   that intercepts and validates calls before execution.
-// - Output: Connected to DB! | Forbidden
+// - Controls direct access to a target object by providing a surrogate placeholder, intercepting
+//   operations to manage instantiation, enforce security, or handle remote communication.
 
-const connectToDb = () => console.log('Connected to DB!')
-const createAuthProxy = (targetFn) => (role) => {
-    if (role !== 'admin') {
-        console.log('Forbidden')
-        return
+class Database {
+    connect() {
+        console.log('Connected')
     }
-    targetFn()
 }
-const connectToDbProxy = createAuthProxy(connectToDb)
-connectToDb('guest')
-connectToDbProxy('guest')
+
+class DatabaseProtectionProxy {
+    #db
+    constructor(db) {
+        this.#db = db
+    }
+    connect(login, password) {
+        if (login !== 'admin' && password !== 'admin') {
+            console.log('Forbidden')
+        } else {
+            console.log('Connected')
+        }
+    }
+}
+
+new Database().connect()
+new DatabaseProtectionProxy(new Database()).connect('john', '123')
+
+// Output:
+// Connected
+// Forbidden

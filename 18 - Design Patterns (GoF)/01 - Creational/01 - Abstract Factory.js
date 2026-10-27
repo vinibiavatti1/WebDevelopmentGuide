@@ -1,24 +1,33 @@
 // Abstract Factory
-// - Provides a way to create families of related objects without specifying their concrete classes.
-//   In JavaScript, we can implement this functionally by passing factory objects or functions as
-//   arguments.
-// - Output:
-//   Enter your name: [______] [Submit]
-//   Enter your name: (______) (Submit)
+// - Provides an interface for creating families of related or dependent objects without specifying
+//   their concrete classes, ensuring architectural consistency across product variants.
 
-const flatComponentFactory = {
-    createInput: (label) => `${label}: [______]`,
-    createButton: (label) => `[${label}]`
+class FlatComponentFactory {
+    buildButton(label) { return `[${label}]` }
+    buildInput(label) { return `${label}: [______]` }
 }
-const roundComponentFactory = {
-    createInput: (label) => `${label}: (______)`,
-    createButton: (label) => `(${label})`
+
+class RoundedComponentFactory {
+    buildButton(label) { return `(${label})` }
+    buildInput(label) { return `${label}: (______)` }
 }
-const renderForm = (componentFactory) => {
-    console.log(
-        componentFactory.createInput('Enter your name'),
-        componentFactory.createButton('Submit')
-    )
+
+class Form {
+    #componentFactory
+    constructor(componentFactory) {
+        this.#componentFactory = componentFactory
+    }
+    show() {
+        console.log(
+            this.#componentFactory.buildInput('Enter your name'),
+            this.#componentFactory.buildButton('Submit')
+        )
+    }
 }
-renderForm(flatComponentFactory)
-renderForm(roundComponentFactory)
+
+new Form(new FlatComponentFactory()).show()
+new Form(new RoundedComponentFactory()).show()
+
+// Output:
+// Enter your name: [______] [Submit]
+// Enter your name: (______) (Submit)

@@ -1,24 +1,33 @@
 // Strategy
-// - Defines a family of algorithms, encapsulates each one, and makes them interchangeable. In
-//   JavaScript, we can implement this functionally by passing strategy functions directly or
-//   selecting them from a lookup table inside a closure context.
-// - Output:
-//   Standard shipping: 10
-//   Express shipping: 25
+// - Defines a family of interchangeable algorithms, encapsulates each one into a separate class,
+//   and allows client code to swap algorithms dynamically at runtime without altering the context
+//   that uses them.
 
-const shippingStrategies = {
-    standard: weight => weight * 2,
-    express: weight => weight * 5 + 10,
-    free: () => 0
-}
-const createShippingCalculator = (strategy = shippingStrategies.standard) => {
-    let currentStrategy = strategy
-    return {
-        setStrategy: newStrategy => { currentStrategy = newStrategy },
-        calculate: weight => currentStrategy(weight)
+class EvenChecker {
+    #strategy
+    constructor(strategy) {
+        this.#strategy = strategy
+    }
+    check(n) {
+        return this.#strategy.check(n)
     }
 }
-const calculator = createShippingCalculator()
-console.log('Standard shipping:', calculator.calculate(5))
-calculator.setStrategy(shippingStrategies.express)
-console.log('Express shipping:', calculator.calculate(5))
+
+class ArithmeticStrategy {
+    check(n) {
+        return n % 2 === 0
+    }
+}
+
+class BitwiseStrategy {
+    check(n) {
+        return (n & 1) === 0
+    }
+}
+
+console.log(new EvenChecker(new ArithmeticStrategy()).check(2))
+console.log(new EvenChecker(new BitwiseStrategy()).check(2))
+
+// Output:
+// true
+// true
