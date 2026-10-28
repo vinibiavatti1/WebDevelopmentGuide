@@ -16,7 +16,7 @@
 /** @abstract */
 class AbstractOrder {
     #id
-    /** @param {number} id  */
+    /** @param {number} id */
     constructor(id) {
         this.#id = id
     }
@@ -39,7 +39,7 @@ class AbstractOrder {
 //   abstract methods.
 
 class Order extends AbstractOrder {
-    /** @param {number} id  */
+    /** @param {number} id */
     constructor(id) {
         super(id)
     }
